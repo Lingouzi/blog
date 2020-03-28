@@ -36,3 +36,7 @@ gen
 /mbg/target/
 /admin/target/
 /portal/target/
+
+# 忽略配置环境
+application-dev.yml
+application-prod.yml
