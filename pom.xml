@@ -7,6 +7,187 @@
     <groupId>top.ybq87</groupId>
     <artifactId>blog</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>common</module>
+    </modules>
+    <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <skipTests>true</skipTests>
+
+        <pagehelper-starter.version>1.2.13</pagehelper-starter.version>
+        <pagehelper.version>5.1.8</pagehelper.version>
+        <druid.version>1.1.10</druid.version>
+        <hutool.version>5.0.7</hutool.version>
+        <logstash-logback.version>4.8</logstash-logback.version>
+        <aliyun-oss.version>3.8.0</aliyun-oss.version>
+        <aliyun-core.version>4.4.6</aliyun-core.version>
+        <aliyun-dm.version>3.3.1</aliyun-dm.version>
+
+        <jjwt.version>0.9.0</jjwt.version>
+        <spring-data-commons.version>2.2.2.RELEASE</spring-data-commons.version>
+        <mybatis-generator.version>1.3.7</mybatis-generator.version>
+        <mybatis-starter.version>2.1.1</mybatis-starter.version>
+        <!--        <mybatis.version>2.1.1</mybatis.version>-->
+        <mysql-connector.version>8.0.15</mysql-connector.version>
+        <knife4j.version>2.0.1</knife4j.version>
+        <commons-pool2.version>2.6.2</commons-pool2.version>
+
+        <!-- 本项目的包 -->
+        <ybq87.version>1.0-SNAPSHOT</ybq87.version>
+
+    </properties>
+
+
+    <!-- 这里的工具包,每个子项目都会包含. 不论有没有引入 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <!-- 如果子模块需要自己引入的工具包,这里列出, 子模块可以不需要写版本就可以引入 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>top.ybq87</groupId>
+                <artifactId>common</artifactId>
+                <version>${ybq87.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ybq87</groupId>
+                <artifactId>mbg</artifactId>
+                <version>${ybq87.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ybq87</groupId>
+                <artifactId>security</artifactId>
+                <version>${ybq87.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ybq87</groupId>
+                <artifactId>redis</artifactId>
+                <version>${ybq87.version}</version>
+            </dependency>
+            <!-- swagger-ui 增强实现 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- MyBatis 生成器 -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>${mybatis-generator.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-starter.version}</version>
+            </dependency>
+            <!--Mysql数据库驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+
+            <!--MyBatis分页插件starter-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+            </dependency>
+            <!--MyBatis分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!--集成druid连接池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--Hutool Java工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--SpringData工具包-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons</artifactId>
+                <version>${spring-data-commons.version}</version>
+            </dependency>
+            <!--JWT(Json Web Token)登录支持-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!-- 阿里核心包 -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-core.version}</version>
+            </dependency>
+            <!-- 阿里云OSS -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-oss.version}</version>
+            </dependency>
+            <!-- 阿里云 邮件相关 -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dm</artifactId>
+                <version>${aliyun-dm.version}</version>
+            </dependency>
+
+            <!--集成logstash-->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash-logback.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
 </project>
