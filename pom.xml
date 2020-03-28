@@ -10,6 +10,9 @@
     <modules>
         <module>common</module>
         <module>mbg</module>
+        <module>redis</module>
+        <module>security</module>
+        <module>admin</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -74,14 +77,16 @@
                 <artifactId>mbg</artifactId>
                 <version>${ybq87.version}</version>
             </dependency>
-            <dependency>
-                <groupId>top.ybq87</groupId>
-                <artifactId>security</artifactId>
-                <version>${ybq87.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>top.ybq87</groupId>
                 <artifactId>redis</artifactId>
+                <version>${ybq87.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>top.ybq87</groupId>
+                <artifactId>security</artifactId>
                 <version>${ybq87.version}</version>
             </dependency>
             <!-- swagger-ui 增强实现 -->
@@ -178,15 +183,15 @@
                 <version>${commons-pool2.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-web</artifactId>-->
+<!--            </dependency>-->
 
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-aop</artifactId>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-aop</artifactId>-->
+<!--            </dependency>-->
 
         </dependencies>
     </dependencyManagement>
