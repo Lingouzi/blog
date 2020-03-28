@@ -11,7 +11,7 @@ blog项目希望构建一个能够快速搭建的个人博客系统，使用一�
 
 #### 项目演示地址：
 
-博客门户页面： [![https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E6%BC%94%E7%A4%BA-Blog--Portal--Vue-green](https://img.shields.io/badge/项目演示-Blog--Portal--Vue-green)](http://www.ybq87.top) 没有接入数据接口
+ [![https://img.shields.io/badge/%E9%A1%B9%E7%9B%AE%E6%BC%94%E7%A4%BA-Blog--Portal--Vue-green](https://img.shields.io/badge/博客门户页面-Blog--Portal--Vue-green)](http://www.ybq87.top) `目前没有接入数据api`
 
 后台管理：搭建中...
 
@@ -86,67 +86,67 @@ blog项目是一套可以快速搭建的个人blog系统，包括前台blog系�
 ### API部分进度
 
 *   common 模块基础功能
-    *   OssUtil 阿里云的 oss管理（100%）![](https://badgen.net/badge/complete/100%/green)
-    *   统一返回Response（100%）![](https://badgen.net/badge/complete/100%/green)
-*   security 模块（100%）![](https://badgen.net/badge/complete/100%/green)
-*   redis 模块封装（100%）![](https://badgen.net/badge/complete/100%/green)
+    *   OssUtil 阿里云的 oss管理
+    *   统一返回Response
+*   security 模块
+*   redis 模块封装
     *   目前只是单机redis
 *   admin模块
-    *   用户管理![](https://badgen.net/badge/coding/0%/red)
-    *   管理员管理![](https://badgen.net/badge/coding/80%/blue)
-    *   权限管理![](https://badgen.net/badge/coding/0%/red)
-    *   角色管理![](https://badgen.net/badge/coding/0%/red)
-    *   相册管理![](https://badgen.net/badge/coding/0%/red)
-    *   博文管理![](https://badgen.net/badge/coding/80%/blue)
+    *   用户管理
+    *   管理员管理
+    *   权限管理
+    *   角色管理
+    *   相册管理
+    *   博文管理
         *   博文上传，Ueditor+MD编辑器，Ueditor加上秀米插件，目前是Ueditor可以打开秀米编辑后保存到ueditor再编辑，但是没有找到接口重新传输数据到秀米，而且秀米的兼容性也有问题。
         *   MD编辑器已经集成完毕，前端md的展示效果还需要调试
-    *   博文分类管理![](https://badgen.net/badge/coding/100%/green)
-    *   博文作者管理![](https://badgen.net/badge/coding/100%/green)
-    *   评论管理![](https://badgen.net/badge/coding/50%/yellow)
+    *   博文分类管理
+    *   博文作者管理
+    *   评论管理
         *   结构已经设计完毕，代码施工中
-    *   留言板![](https://badgen.net/badge/coding/0%/red)
+    *   留言板
         *   留言板目前采用评论结构，后期考虑加入上传图片的功能。
-    *   用户反馈![](https://badgen.net/badge/coding/0%/red)
+    *   用户反馈
 *   portal模块
-    *   博文接口![](https://badgen.net/badge/coding/20%/orange)
-    *   分类接口![](https://badgen.net/badge/coding/0%/red)
-    *   留言板接口![](https://badgen.net/badge/coding/0%/red)
-    *   相册接口![](https://badgen.net/badge/coding/0%/red)
-    *   评论模块接口![](https://badgen.net/badge/coding/0%/red)
-    *   第三方登录模块接口![](https://badgen.net/badge/coding/0%/red)
+    *   博文接口
+    *   分类接口
+    *   留言板接口
+    *   相册接口
+    *   评论模块接口
+    *   第三方登录模块接口
 
 
 
 ### Blog-portal-vue进度
 
-*   博文模块![](https://badgen.net/badge/coding/20%/orange)
+*   博文模块
     *   目前只是把列表使用静态数据展示
     *   博文详情还没有
-*   关于我们模块![](https://badgen.net/badge/coding/20%/orange)
+*   关于我们模块
     *   个人简介（想法是做一个个人简历的页面展示）
-*   搜索模块![](https://badgen.net/badge/coding/0%/red)
-*   相册![](https://badgen.net/badge/coding/0%/red)
-*   分类模块![](https://badgen.net/badge/coding/20%/orange)
-*   热门标签![](https://badgen.net/badge/coding/20%/orange)
-*   留言板![](https://badgen.net/badge/coding/0%/red)
-*   评论模块![](https://badgen.net/badge/coding/80%/blue)
-*   意见反馈![](https://badgen.net/badge/coding/80%/blue)
-*   小店;)![](https://badgen.net/badge/coding/0%/red)
-*   友链![](https://badgen.net/badge/coding/50%/yellow)
+*   搜索模块
+*   相册
+*   分类模块
+*   热门标签
+*   留言板
+*   评论模块
+*   意见反馈
+*   小店;)
+*   友链
 
 
 
 ### Blog-admin-vue进度
 
-*   用户管理![](https://badgen.net/badge/coding/0%/red)
-*   后台管理员管理![](https://badgen.net/badge/complete/100%/green)
-*   博文管理![](https://badgen.net/badge/coding/80%/blue)
-*   博文分类管理![](https://badgen.net/badge/complete/100%/green)
-*   相册管理![](https://badgen.net/badge/coding/0%/red)
-*   评论管理![](https://badgen.net/badge/coding/0%/red)
-*   留言板![](https://badgen.net/badge/coding/0%/red)
-*   意见反馈![](https://badgen.net/badge/coding/0%/red)
-*   各类报表![](https://badgen.net/badge/coding/0%/red)
+*   用户管理
+*   后台管理员管理
+*   博文管理
+*   博文分类管理
+*   相册管理
+*   评论管理
+*   留言板
+*   意见反馈
+*   各类报表
 
 
 
@@ -176,11 +176,7 @@ blog项目是一套可以快速搭建的个人blog系统，包括前台blog系�
 
 ### 联系方式
 
-
-
-![](https://badgen.net/badge/QQ/664162337/)![](https://badgen.net/badge/微信/ly19870316/green)![](https://badgen.net/badge/Email/664162337@qq.com/orange)
-
-
+![](https://badgen.net/badge/QQ/664162337/blue)![](https://badgen.net/badge/微信/ly19870316/green)![](https://badgen.net/badge/Email/664162337@qq.com/orange)
 
 ### 公众号
 
