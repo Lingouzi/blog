@@ -85,68 +85,16 @@ blog项目是一套可以快速搭建的个人blog系统，包括前台blog系�
 
 ### API部分进度
 
-*   common 模块基础功能
-    *   OssUtil 阿里云的 oss管理
-    *   统一返回Response
-*   security 模块
-*   redis 模块封装
-    *   目前只是单机redis
-*   admin模块
-    *   用户管理
-    *   管理员管理
-    *   权限管理
-    *   角色管理
-    *   相册管理
-    *   博文管理
-        *   博文上传，Ueditor+MD编辑器，Ueditor加上秀米插件，目前是Ueditor可以打开秀米编辑后保存到ueditor再编辑，但是没有找到接口重新传输数据到秀米，而且秀米的兼容性也有问题。
-        *   MD编辑器已经集成完毕，前端md的展示效果还需要调试
-    *   博文分类管理
-    *   博文作者管理
-    *   评论管理
-        *   结构已经设计完毕，代码施工中
-    *   留言板
-        *   留言板目前采用评论结构，后期考虑加入上传图片的功能。
-    *   用户反馈
-*   portal模块
-    *   博文接口
-    *   分类接口
-    *   留言板接口
-    *   相册接口
-    *   评论模块接口
-    *   第三方登录模块接口
+![API部分](http://img.ybq87.top/upic/2020/0328/API部分.png)
 
 
 
 ### Blog-portal-vue进度
 
-*   博文模块
-    *   目前只是把列表使用静态数据展示
-    *   博文详情还没有
-*   关于我们模块
-    *   个人简介（想法是做一个个人简历的页面展示）
-*   搜索模块
-*   相册
-*   分类模块
-*   热门标签
-*   留言板
-*   评论模块
-*   意见反馈
-*   小店;)
-*   友链
-
-
-
+![Blog-portal-vue](http://img.ybq87.top/upic/2020/0328/Blog-portal-vue.png)
 ### Blog-admin-vue进度
 
-*   用户管理
-*   后台管理员管理
-*   博文管理
-*   博文分类管理
-*   相册管理
-*   评论管理
-*   留言板
-*   意见反馈
-*   各类报表
+![Blog-admin-vue](http://img.ybq87.top/upic/2020/0328/Blog-admin-vue.png)
 
 
 
@@ -176,7 +124,7 @@ blog项目是一套可以快速搭建的个人blog系统，包括前台blog系�
 
 ### 联系方式
 
-![](https://badgen.net/badge/QQ/664162337/blue)![](https://badgen.net/badge/微信/ly19870316/green)![](https://badgen.net/badge/Email/664162337@qq.com/orange)
+![664162337](https://badgen.net/badge/QQ/664162337/blue)![ly19870316](https://badgen.net/badge/微信/ly19870316/green)![664162337@qq.com](https://badgen.net/badge/Email/664162337@qq.com/orange)
 
 ### 公众号
 
