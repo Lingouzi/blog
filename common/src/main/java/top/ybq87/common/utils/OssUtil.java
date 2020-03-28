@@ -69,7 +69,7 @@ public class OssUtil {
         ALIYUN_OSS_CALLBACK = aliyunOssCallback;
     }
     
-    @Value("${aliyun.oss.dir.prefix:ergouzi/images/}")
+    @Value("${aliyun.oss.dir.prefix:blog/images/}")
     public void setAliyunOssDirPrefix(String aliyunOssDirPrefix) {
         ALIYUN_OSS_DIR_PREFIX = aliyunOssDirPrefix;
     }

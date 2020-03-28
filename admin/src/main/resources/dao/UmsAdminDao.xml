@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ybq87.dao.UmsAdminDao">
+    <resultMap id="umsAdminListDtoResultMap" type="top.ybq87.dto.UmsAdminDto" extends="top.ybq87.mbg.mapper.UmsAdminMapper.BaseResultMap"></resultMap>
+    <select id="getList" resultMap="umsAdminListDtoResultMap">
+        SELECT * from ums_admin ua
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                ua.username like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR ua.nick_name like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR ua.note like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+            <if test="status != null">
+                AND ua.status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY ua.create_time DESC
+    </select>
+</mapper>

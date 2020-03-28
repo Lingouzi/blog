@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ybq87.dao.CmsPostDao">
+    <resultMap id="getListResultMap" type="top.ybq87.dto.CmsPostDto" extends="top.ybq87.mbg.mapper.CmsPostMapper.BaseResultMap">
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="contentType" jdbcType="TINYINT" property="contentType" />
+        <association property="author" resultMap="top.ybq87.mbg.mapper.CmsAuthorMapper.BaseResultMap" columnPrefix="auth_"/>
+        <association property="category" resultMap="top.ybq87.mbg.mapper.CmsPostCategoryMapper.BaseResultMap" columnPrefix="cate_"/>
+    </resultMap>
+
+    <select id="getList" resultMap="getListResultMap">
+        SELECT cp.*,
+        ca.id auth_id,
+        ca.name auth_name,
+        ca.icon auth_icon,
+        cate.id cate_id,
+        cate.name cate_name,
+        cate.icon cate_icon
+        FROM cms_post cp
+        left join cms_post_content cpc on cpc.post_id = cp.id
+        left join cms_author ca on ca.id = cp.author_id
+        left join cms_post_category cate on cate.id = cp.category_id
+        <where>
+            AND cp.status = 1
+            <if test="categoryId != null">
+                AND cp.category_id = #{categoryId,jdbcType=INTEGER}
+            </if>
+            <if test="authorId != null">
+                AND cp.author_id = #{authorId,jdbcType=INTEGER}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                cp.title like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR cp.summary like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR cpc.content like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+        </where>
+        order by cp.create_time desc
+    </select>
+    <select id="getPostById" resultMap="getListResultMap">
+        SELECT cp.*,
+        ca.id auth_id,
+        ca.name auth_name,
+        ca.icon auth_icon,
+        cate.id cate_id,
+        cate.name cate_name,
+        cate.icon cate_icon,
+        cpc.content content,
+        cpc.type contentType
+        FROM cms_post cp
+        left join cms_post_content cpc on cpc.post_id = cp.id
+        left join cms_author ca on ca.id = cp.author_id
+        left join cms_post_category cate on cate.id = cp.category_id
+        <where>
+            cp.id = #{id,jdbcType=BIGINT}
+        </where>
+    </select>
+</mapper>

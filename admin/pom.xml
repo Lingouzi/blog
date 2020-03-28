@@ -11,6 +11,7 @@
     <packaging>jar</packaging>
     <artifactId>admin</artifactId>
     <dependencies>
+
         <dependency>
             <groupId>top.ybq87</groupId>
             <artifactId>mbg</artifactId>
@@ -25,6 +26,28 @@
             <groupId>top.ybq87</groupId>
             <artifactId>redis</artifactId>
         </dependency>
+
+        <!-- logstash框架 -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+        </dependency>
+
+        <!-- mysql 连接池管理 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

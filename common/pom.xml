@@ -30,6 +30,12 @@
             <artifactId>spring-data-commons</artifactId>
         </dependency>
 
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+
         <!-- 阿里云 oss 模块 -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>

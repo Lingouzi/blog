@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ybq87.dao.CmsAuthorDao">
+    <select id="getList" resultMap="top.ybq87.mbg.mapper.CmsAuthorMapper.BaseResultMap">
+        select * from cms_author ca
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                ca.name like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR ca.phone like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR ca.summary like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR ca.note like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+            <if test="status != null">
+                AND ca.status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by ca.create_time desc
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ybq87.dao.UmsPermissionDao">
+    <select id="getList" resultMap="top.ybq87.mbg.mapper.UmsPermissionMapper.BaseResultMap">
+        SELECT
+        <include refid="top.ybq87.mbg.mapper.UmsPermissionMapper.Base_Column_List"/>
+        from ums_permission up
+        <where>
+            <if test="keyword != null and keyword != ''">
+                AND (
+                up.name like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                OR up.uri like CONCAT('%',#{keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+            <if test="status != null">
+                AND up.status = #{status,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY up.create_time DESC
+    </select>
+</mapper>
