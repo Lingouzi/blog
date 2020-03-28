@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ybq87.mbg.mapper.CmsCommentMapper">
+  <resultMap id="BaseResultMap" type="top.ybq87.mbg.model.CmsComment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="owner_id" jdbcType="BIGINT" property="ownerId" />
+    <result column="from_id" jdbcType="BIGINT" property="fromId" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
+    <result column="from_avatar" jdbcType="VARCHAR" property="fromAvatar" />
+    <result column="link_num" jdbcType="INTEGER" property="linkNum" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="status" jdbcType="BIT" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_time, owner_id, from_id, from_name, from_avatar, link_num, content, status
+  </sql>
+  <select id="selectByExample" parameterType="top.ybq87.mbg.model.CmsCommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cms_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cms_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.ybq87.mbg.model.CmsCommentExample">
+    delete from cms_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.ybq87.mbg.model.CmsComment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cms_comment (create_time, owner_id, from_id, 
+      from_name, from_avatar, link_num, 
+      content, status)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{ownerId,jdbcType=BIGINT}, #{fromId,jdbcType=BIGINT}, 
+      #{fromName,jdbcType=VARCHAR}, #{fromAvatar,jdbcType=VARCHAR}, #{linkNum,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="top.ybq87.mbg.model.CmsComment">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into cms_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="fromId != null">
+        from_id,
+      </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar,
+      </if>
+      <if test="linkNum != null">
+        link_num,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="fromId != null">
+        #{fromId,jdbcType=BIGINT},
+      </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="linkNum != null">
+        #{linkNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.ybq87.mbg.model.CmsCommentExample" resultType="java.lang.Long">
+    select count(*) from cms_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cms_comment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ownerId != null">
+        owner_id = #{record.ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromId != null">
+        from_id = #{record.fromId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fromName != null">
+        from_name = #{record.fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromAvatar != null">
+        from_avatar = #{record.fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkNum != null">
+        link_num = #{record.linkNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cms_comment
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      owner_id = #{record.ownerId,jdbcType=BIGINT},
+      from_id = #{record.fromId,jdbcType=BIGINT},
+      from_name = #{record.fromName,jdbcType=VARCHAR},
+      from_avatar = #{record.fromAvatar,jdbcType=VARCHAR},
+      link_num = #{record.linkNum,jdbcType=INTEGER},
+      content = #{record.content,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.ybq87.mbg.model.CmsComment">
+    update cms_comment
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=BIGINT},
+      </if>
+      <if test="fromId != null">
+        from_id = #{fromId,jdbcType=BIGINT},
+      </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAvatar != null">
+        from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      </if>
+      <if test="linkNum != null">
+        link_num = #{linkNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.ybq87.mbg.model.CmsComment">
+    update cms_comment
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      owner_id = #{ownerId,jdbcType=BIGINT},
+      from_id = #{fromId,jdbcType=BIGINT},
+      from_name = #{fromName,jdbcType=VARCHAR},
+      from_avatar = #{fromAvatar,jdbcType=VARCHAR},
+      link_num = #{linkNum,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 参考: https://www.cnblogs.com/black-spike/p/7872941.html -->
+    <!-- https://www.cnblogs.com/lichenwei/p/4145696.html -->
+    <!-- https://mybatis.org/generator/running/runningWithJava.html -->
+    <!-- https://blog.csdn.net/zsq520520/article/details/50952830 -->
+    <properties resource="generator.properties"/>
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 生成的java文件的编码格式,和项目格式匹配,但是一般都是utf8吧,没谁丧心病狂的是gbk吧? -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 为模型生成序列化方法 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 生成mapper.xml时覆盖原文件 , 避免了重复生成文件 -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+        <!--可以自定义生成model的代码注释-->
+        <commentGenerator type="top.ybq87.mbg.CommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!-- 配置数据库连接 读取 generator.properties 文件的配置信息 -->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                connectionURL="${jdbc.connectionURL}"
+                userId="${jdbc.userId}"
+                password="${jdbc.password}">
+            <!-- 解决mysql驱动升级到8.0后不生成指定数据库代码的问题 -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+        <!-- 指定生成model的路径 targetPackage:指定包路径 targetProject 为相对路径 = 项目名称/src/... -->
+        <javaModelGenerator targetPackage="top.ybq87.mbg.model" targetProject="mbg/src/main/java"/>
+        <!-- 指定生成mapper.xml的路径 -->
+        <sqlMapGenerator targetPackage="top.ybq87.mbg.mapper"
+                targetProject="mbg/src/main/resources"/>
+        <!-- 指定生成mapper接口的的路径 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="top.ybq87.mbg.mapper"
+                targetProject="mbg/src/main/java"/>
+        <!-- 生成全部表tableName设为% -->
+        <table tableName="%">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <!-- 强制将 status 字段改变为 int 类型的 -->
+            <columnOverride column="status" javaType="Integer"/>
+            <columnOverride column="type" javaType="Integer"/>
+            <columnOverride column="verified" javaType="Integer"/>
+        </table>
+        <!-- 单个表 -->
+        <!--        <table tableName="cms_post_content">-->
+        <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--            &lt;!&ndash; tinyint 对应为 integer,默认是Boolean &ndash;&gt;-->
+        <!--            <columnOverride column="status" javaType="Integer"/>-->
+        <!--            <columnOverride column="type" javaType="Integer"/>-->
+        <!--            <columnOverride column="verified" javaType="Integer"/>-->
+        <!--        </table>-->
+    </context>
+</generatorConfiguration>
