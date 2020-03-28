@@ -1,7 +1,7 @@
 spring:
     servlet:
         multipart:
-            enabled: true #开启文件上传
+            enabled: true
             max-file-size: 10MB #限制文件上传大小为10M
     datasource:
         url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
