@@ -1,5 +1,6 @@
 package top.ybq87.mbg.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,7 +10,7 @@ public class UmsAdmin implements Serializable {
 
     @ApiModelProperty(value = "登录账号,最长64字符")
     private String username;
-
+    
     @ApiModelProperty(value = "密码，12位，数字和字母，区分大小写")
     private String password;
 

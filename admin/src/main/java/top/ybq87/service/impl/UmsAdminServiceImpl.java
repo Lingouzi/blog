@@ -1,6 +1,9 @@
 package top.ybq87.service.impl;
 
+import cn.hutool.core.math.MathUtil;
 import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import com.google.common.base.Strings;
 import java.util.ArrayList;
@@ -77,6 +80,12 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public UmsAdmin register(UmsAdminParam umsAdminParam) {
         UmsAdmin umsAdmin = new UmsAdmin();
         BeanUtils.copyProperties(umsAdminParam, umsAdmin);
+        
+        // 如果用户没有填写昵称,随机生成一个
+        if (StrUtil.isBlank(umsAdmin.getNickName())) {
+            umsAdmin.setNickName("nickName" + RandomUtil.randomNumber());
+        }
+        
         umsAdmin.setCreateTime(new Date());
         umsAdmin.setStatus(1);
         //查询是否有相同用户名的用户
@@ -88,8 +97,10 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         }
         //将密码进行加密操作
         String encodePassword = passwordEncoder.encode(umsAdmin.getPassword());
-        umsAdmin.setPassword(umsAdmin.getPassword());
+        umsAdmin.setPassword(encodePassword);
         adminMapper.insert(umsAdmin);
+        // 返回前端结果时,不返回密码信息
+        umsAdmin.setPassword(null);
         return umsAdmin;
     }
     
@@ -110,6 +121,11 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         return adminRoleRelationDao.getPermissionList(adminId);
     }
     
+    /**
+     * 依据用户名, 获取用户的真实数据信息和权限存储到缓存
+     * @param username
+     * @return
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
         UmsAdmin admin = adminCacheService.getAdmin(username);
@@ -135,9 +151,11 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public String login(String username, String password) {
         String token = null;
-        //密码需要客户端加密后传递
         try {
+            // 用户登录的逻辑:
+            // 用户第一次登录时, 缓存中是没有用户信息的, 即便是用户输入错误信息, loadUserByUsername方法只会返回真实正确的数据
             UserDetails userDetails = loadUserByUsername(username);
+            // 对比用户传过来的数据和数据库(redis)的真实数据对比
             if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("密码不正确");
             }
@@ -145,30 +163,47 @@ public class UmsAdminServiceImpl implements UmsAdminService {
                     null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
-            // TODO 更新用户最后登录时间
-            // updateLoginTimeByUsername(username);
             
-            // 记录用户的登录行为.
-            insertLoginLog(username);
+            // 使用异步线程去记录数据
+            ThreadUtil.execute(() -> {
+                // 更新用户最后登录时间
+                updateLoginTimeByUsername(username, new Date());
+                
+                // 记录用户的登录行为.
+                insertLoginLog(username, new Date());
+            });
         } catch (AuthenticationException e) {
             LOGGER.warn("登录异常:{}", e.getMessage());
         }
         return token;
     }
     
+    private void updateLoginTimeByUsername(String username, Date loginDate) {
+        UmsAdmin admin = getAdminByUsername(username);
+        if (admin != null) {
+            UmsAdmin update = new UmsAdmin();
+            update.setId(admin.getId());
+            update.setLoginTime(loginDate);
+            adminMapper.updateByPrimaryKeySelective(admin);
+        }
+    }
+    
     /**
      * 添加登录记录
      * @param username 用户名
+     * @param date
      */
-    private void insertLoginLog(String username) {
+    private void insertLoginLog(String username, Date loginDate) {
         UmsAdmin admin = getAdminByUsername(username);
-        UmsAdminLoginLog loginLog = new UmsAdminLoginLog();
-        loginLog.setAdminId(admin.getId());
-        loginLog.setCreateTime(new Date());
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        loginLog.setIp(request.getRemoteAddr());
-        loginLogMapper.insert(loginLog);
+        if (admin != null) {
+            UmsAdminLoginLog loginLog = new UmsAdminLoginLog();
+            loginLog.setAdminId(admin.getId());
+            loginLog.setCreateTime(loginDate);
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            HttpServletRequest request = attributes.getRequest();
+            loginLog.setIp(request.getRemoteAddr());
+            loginLogMapper.insert(loginLog);
+        }
     }
     
     @Override
