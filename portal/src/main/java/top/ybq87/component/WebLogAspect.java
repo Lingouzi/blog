@@ -45,7 +45,7 @@ public class WebLogAspect {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
     
-    @Pointcut("execution(public * top.ybq87.portal.controller.*.*(..))")
+    @Pointcut("execution(public * top.ybq87.controller.*.*(..))")
     public void webLog() {
     }
     
@@ -55,6 +55,7 @@ public class WebLogAspect {
     
     @AfterReturning(value = "webLog()", returning = "ret")
     public void doAfterReturning(Object ret) throws Throwable {
+        // 监控返回值
     }
     
     @Around("webLog()")
